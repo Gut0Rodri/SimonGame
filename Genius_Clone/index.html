@@ -10,20 +10,38 @@
     <main>
       <div class="container-game">
         <div class="table-game">
-          <button class="" id="green"></button>
-          <button class="" id="red"></button>
-          <button id="blue"></button>
-          <button id="yellow"></button>
+          <button id="green" disabled></button>
+          <button id="red" disabled></button>
+          <button id="blue" disabled></button>
+          <button id="yellow" disabled></button>
 
-          <span class="circle-mid">go</span>
+          <span class="circle-mid"></span>
         </div>
 
-        <button class="button-init-game">Iniciar</button>
+        <button onclick="countdown()" class="button-init-game usable" id="button-init-game">Iniciar</button>
       </div>
 
       <div class="container-score-configs">
-        <div class="container-score"></div>
-        <div class="container-configs"></div>
+        <div class="container-score-button-configs">
+          <div class="container-button">
+            <button class="button-configs" id="button-configs"><img src="./src/assets/images/Gear_icon_black.svg" alt="Botão de configurações"></button>
+          </div>
+
+          <div class="container-score">
+            <div>
+              <p>Atual</p>
+              <span id="current-score"></span>
+            </div>
+            <div>
+              <p>Anterior</p>
+              <span id="previous-score"></span>
+            </div>
+            <div>
+              <p>Recorde</p>
+              <span id="best-score"></span>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
 
@@ -34,7 +52,7 @@
             rel="noreferrer"
             target="_blank"
             href="https://www.github.com/gut0Rodri"
-            ><img src="./src/assets/images/Github.svg" alt="Github"
+            ><img src="./src/assets/images/Github_icon_lavender.svg" alt="Github"
           /></a>
         </li>
         <li>
@@ -42,7 +60,7 @@
             rel="noreferrer"
             target="_blank"
             href="https://www.linkedin.com/in/gutorodri"
-            ><img src="./src/assets/images/Linkedin.svg" alt="Linkedin"
+            ><img src="./src/assets/images/Linkedin_icon_lavender.svg" alt="Linkedin"
           /></a>
         </li>
       </ul>

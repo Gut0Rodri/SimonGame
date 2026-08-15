@@ -47,14 +47,12 @@ main {
 footer {
   position: absolute;
 
-  left: 50%;
+  left: 1rem;
   bottom: 1rem;
-
-  transform: translateX(-50%);
 
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 
   gap: 0.5rem;
 }
@@ -191,6 +189,11 @@ button.active {
 }
 
 .button-init-game {
+  display: none;
+}
+
+.button-init-game.usable {
+  display: block;
   position: absolute;
 
   top: calc(100% + 32px);
@@ -214,7 +217,7 @@ button.active {
   cursor: pointer;
 }
 
-.button-init-game:hover {
+.button-init-game.usable:hover {
   background-color: var(--black);
   color: var(--light-lavender);
 }
@@ -232,4 +235,83 @@ button.active {
   background-color: var(--light-lavender);
 
   border-radius: 2rem;
+
+  padding: 1.5rem;
+}
+
+.container-score-button-configs {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+
+  gap: 4rem;
+}
+
+.container-score {
+  background-color: aqua;
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--black-opacity-20);
+
+  border-radius: 1rem;
+
+  padding-inline: 1rem;
+}
+
+.container-score div {
+  position: relative;
+  
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--black);
+}
+
+.container-score div:not(:nth-child(3)) {
+  border-bottom: 2px solid var(--black);
+}
+
+.container-score p {
+  position: absolute;
+
+  top: .75rem;
+
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.container-score span {
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.container-button {
+  display: none;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.container-button button {
+  border: none;
+  background-color: none;
+
+  cursor: pointer;
+}
+
+.container-button button img {
+  width: 1.25rem;
 }
