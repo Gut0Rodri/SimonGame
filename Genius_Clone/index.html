@@ -8,26 +8,28 @@
   </head>
   <body>
     <main>
-      <div class="container-game">
-        <div class="table-game">
-          <button id="green" disabled></button>
-          <button id="red" disabled></button>
-          <button id="blue" disabled></button>
-          <button id="yellow" disabled></button>
+      <div>
+        <div class="container-game">
+          <div class="table-game">
+            <button class="button-table-game" id="green"></button>
+            <button class="button-table-game" id="red"></button>
+            <button class="button-table-game" id="blue"></button>
+            <button class="button-table-game" id="yellow"></button>
 
-          <span class="circle-mid"></span>
-        </div>
-
-        <button onclick="countdown()" class="button-init-game usable" id="button-init-game">Iniciar</button>
-      </div>
-
-      <div class="container-score-configs">
-        <div class="container-score-button-configs">
-          <div class="container-button">
-            <button class="button-configs" id="button-configs"><img src="./src/assets/images/Gear_icon_black.svg" alt="Botão de configurações"></button>
+            <span class="circle-mid"></span>
           </div>
 
-          <div class="container-score">
+          <button
+            onclick="countdown()"
+            class="button-init-game usable"
+            id="button-init-game"
+          >
+            Iniciar
+          </button>
+        </div>
+
+        <aside class="container-score">
+          <div class="score">
             <div>
               <p>Atual</p>
               <span id="current-score"></span>
@@ -41,7 +43,7 @@
               <span id="best-score"></span>
             </div>
           </div>
-        </div>
+        </aside>
       </div>
     </main>
 
@@ -52,7 +54,9 @@
             rel="noreferrer"
             target="_blank"
             href="https://www.github.com/gut0Rodri"
-            ><img src="./src/assets/images/Github_icon_lavender.svg" alt="Github"
+            ><img
+              src="./src/assets/images/Github_icon_lavender.svg"
+              alt="Github"
           /></a>
         </li>
         <li>
@@ -60,7 +64,9 @@
             rel="noreferrer"
             target="_blank"
             href="https://www.linkedin.com/in/gutorodri"
-            ><img src="./src/assets/images/Linkedin_icon_lavender.svg" alt="Linkedin"
+            ><img
+              src="./src/assets/images/Linkedin_icon_lavender.svg"
+              alt="Linkedin"
           /></a>
         </li>
       </ul>

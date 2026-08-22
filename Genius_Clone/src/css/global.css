@@ -24,121 +24,145 @@
 }
 
 body {
-  position: relative;
   background-color: var(--bg-black);
 
-  min-height: 100dvh;
-  min-width: 100dvw;
-
-  display: flex;
-
-  justify-content: center;
-  align-items: center;
+  overflow-x: hidden;
 
   font-family: var(--ff-montserrat);
+  color: var(--light-lavender);
+}
+
+body.block {
+  overflow: hidden;
 }
 
 main {
-  position: relative;
-  display: flex;
-  gap: 1rem;
-}
-
-footer {
-  position: absolute;
-
-  left: 1rem;
-  bottom: 1rem;
+  min-height: 100dvh;
 
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
 }
 
-footer > ul {
+main > div {
   display: flex;
+  flex-direction: column-reverse;
 
-  gap: 0.5rem;
-}
-
-footer > ul img {
-  height: 20px;
-}
-
-footer > p {
-  color: var(--light-lavender);
-  text-transform: uppercase;
-
-  font-size: 0.75rem;
+  gap: 2rem;
 }
 
 .container-game {
-  display: flex;
-  flex-direction: column;
-
-  gap: 1rem;
-
-  align-items: center;
+  position: relative;
 }
 
 .table-game {
   position: relative;
-  padding: 2.25rem;
-
   display: grid;
+
   grid-template-columns: repeat(2, auto);
   grid-template-rows: repeat(2, auto);
 
   gap: 1rem;
 
-  background-color: var(--black);
+  padding: 2rem;
 
   border-radius: 1000px;
+  background-color: var(--black);
 }
 
-.table-game > button {
-  width: 12rem;
-  height: 12rem;
+.button-table-game {
+  width: 8rem;
+  height: 8rem;
 
-  outline: none;
   border: none;
 
-  cursor: pointer;
+  opacity: 0.25;
 
   transition: all 0.15s;
 
-  opacity: 0.25;
+  cursor: pointer;
 }
 
-.table-game > button:hover {
-  transform: scale(1.02);
-  opacity: 1;
-}
-
-.table-game > .circle-mid {
+.circle-mid {
   position: absolute;
 
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 
-  width: 9rem;
-  height: 9rem;
+  width: 6rem;
+  height: 6rem;
 
   display: flex;
-  align-items: center;
   justify-content: center;
-
-  text-transform: uppercase;
-
-  font-size: 3rem;
-  color: var(--light-lavender);
+  align-items: center;
 
   background-color: var(--black);
 
   border-radius: 1000px;
+
+  font-size: 2rem;
+}
+
+.button-init-game {
+  display: none;
+  position: absolute;
+
+  top: calc(100% + 32px);
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--light-lavender);
+
+  font-family: var(--ff-montserrat);
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.875rem;
+
+  padding: 0.5rem 2rem;
+
+  border: 2px solid var(--light-lavender);
+  border-radius: 0.5rem;
+
+  transition: all 0.15s;
+
+  cursor: pointer;
+}
+
+.button-init-game.usable {
+  display: block;
+}
+
+.container-score {
+  background-color: var(--light-lavender);
+
+  padding: .75rem;
+
+  border-radius: 1.5rem;
+
+  height: 8rem;
+}
+
+.score {
+  background-color: var(--black-opacity-20);
+
+  border-radius: 1rem;
+
+  display: flex;
+
+  height: 100%;
+}
+
+.score > div {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.score > div:not(:nth-child(3)) {
+  border-right: 2px solid var(--black);
 }
 
 button#green {
@@ -158,19 +182,6 @@ button#yellow {
   background-color: var(--yellow);
 }
 
-button#green:hover {
-  box-shadow: 0 0 10px var(--green);
-}
-button#red:hover {
-  box-shadow: 0 0 10px var(--red);
-}
-button#blue:hover {
-  box-shadow: 0 0 10px var(--blue);
-}
-button#yellow:hover {
-  box-shadow: 0 0 10px var(--yellow);
-}
-
 button#green.active {
   box-shadow: 0 0 10px var(--green);
 }
@@ -184,134 +195,50 @@ button#yellow.active {
   box-shadow: 0 0 10px var(--yellow);
 }
 
-button.active {
+.button-table-game.active {
   opacity: 1;
 }
 
-.button-init-game {
-  display: none;
+.button-table-game.win {
+  opacity: 1;
+  box-shadow: 0 0 10px var(--green) !important;
+  background-color: var(--green) !important;
 }
 
-.button-init-game.usable {
-  display: block;
-  position: absolute;
-
-  top: calc(100% + 32px);
-
-  width: 10rem;
-  height: 2.5rem;
-
-  text-transform: uppercase;
-  font-family: var(--ff-montserrat);
-  font-weight: 600;
-
-  color: var(--black);
-
-  background-color: var(--light-lavender);
-
-  border: 2px solid var(--light-lavender);
-  border-radius: .5rem;
-
-  transition: all .15s;
-
-  cursor: pointer;
+.button-table-game.game-over {
+  opacity: 1;
+  box-shadow: 0 0 10px var(--red) !important;
+  background-color: var(--red) !important;
 }
 
-.button-init-game.usable:hover {
-  background-color: var(--black);
-  color: var(--light-lavender);
+.button-table-game.usable {
+  pointer-events: all;
 }
 
-.container-score-configs {
-  position: absolute;
+@media (hover: hover) and (pointer: fine) {
+  .table-game > button:hover {
+    transform: scale(1.02);
+    opacity: 1;
+  }
 
-  top: 0;
-  left: calc(100% + 32px);
-  bottom: 0;
+  button#green:hover {
+    box-shadow: 0 0 10px var(--green);
+  }
 
-  width: 18rem;
-  height: 100%;
+  button#red:hover {
+    box-shadow: 0 0 10px var(--red);
+  }
 
-  background-color: var(--light-lavender);
+  button#blue:hover {
+    box-shadow: 0 0 10px var(--blue);
+  }
 
-  border-radius: 2rem;
+  button#yellow:hover {
+    box-shadow: 0 0 10px var(--yellow);
+  }
 
-  padding: 1.5rem;
-}
-
-.container-score-button-configs {
-  display: flex;
-  flex-direction: column;
-
-  width: 100%;
-  height: 100%;
-
-  gap: 4rem;
-}
-
-.container-score {
-  background-color: aqua;
-  height: 100%;
-  width: 100%;
-
-  display: flex;
-  flex-direction: column;
-
-  align-items: center;
-  justify-content: center;
-
-  background-color: var(--black-opacity-20);
-
-  border-radius: 1rem;
-
-  padding-inline: 1rem;
-}
-
-.container-score div {
-  position: relative;
-  
-  height: 100%;
-  width: 100%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  color: var(--black);
-}
-
-.container-score div:not(:nth-child(3)) {
-  border-bottom: 2px solid var(--black);
-}
-
-.container-score p {
-  position: absolute;
-
-  top: .75rem;
-
-  text-transform: uppercase;
-  font-size: 0.875rem;
-  font-weight: 600;
-}
-
-.container-score span {
-  font-size: 2rem;
-  font-weight: 900;
-}
-
-.container-button {
-  display: none;
-  justify-content: flex-end;
-  width: 100%;
-}
-
-.container-button button {
-  border: none;
-  background-color: none;
-
-  cursor: pointer;
-}
-
-.container-button button img {
-  width: 1.25rem;
+  .button-init-game.usable:hover {
+    background-color: var(--black);
+    color: var(--light-lavender);
+  }
 }
