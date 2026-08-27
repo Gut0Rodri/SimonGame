@@ -36,6 +36,35 @@ body.block {
   overflow: hidden;
 }
 
+footer {
+  display: flex;
+  flex-direction: column-reverse;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 1rem;
+
+  padding: 1rem;
+}
+
+footer p {
+  text-transform: uppercase;
+
+  font-weight: 500;
+  font-size: .75rem;
+}
+
+footer ul{
+  display: flex;
+
+  gap: 1rem;
+}
+
+footer ul li a img {
+  height: 20px;
+}
+
 main {
   min-height: 100dvh;
 
@@ -150,15 +179,40 @@ main > div {
   display: flex;
 
   height: 100%;
+
+  padding-block: 0.75rem;
 }
 
 .score > div {
+  position: relative;
   width: 100%;
   height: 100%;
 
   display: flex;
   justify-content: center;
   align-items: center;
+
+  color: var(--black);
+  font-weight: 600;
+}
+
+.score > div > p {
+  position: absolute;
+
+  top: 0;
+  left: 50%;
+  transform: translate(-50%);
+
+  text-transform: uppercase;
+  font-size: .75rem;
+}
+
+.score > div:not(:nth-child(2)) > span {
+  font-size: 1.5rem;
+}
+
+.score > div > span {
+  font-size: 2.25rem;
 }
 
 .score > div:not(:nth-child(3)) {
@@ -240,5 +294,12 @@ button#yellow.active {
   .button-init-game.usable:hover {
     background-color: var(--black);
     color: var(--light-lavender);
+  }
+}
+
+@media (width >= 40rem) {
+  .button-table-game {
+    width: 10rem;
+    height: 10rem;
   }
 }

@@ -19,34 +19,96 @@ currentScoreHTML.textContent = currentScore;
 previuosScoreHTML.textContent = previuosScore;
 bestScoreHTML.textContent = bestScore;
 
+const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+function playSound(frequency) {
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+
+    oscillator.frequency.value = frequency;
+    oscillator.type = "sine";
+
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+
+    gain.gain.setValueAtTime(0.3, audioContext.currentTime);
+    gain.gain.exponentialRampToValueAtTime(
+        0.001,
+        audioContext.currentTime + 0.3
+    );
+
+    oscillator.start();
+    oscillator.stop(audioContext.currentTime + 0.3);
+}
+
+function playGreenSound() {
+    playSound(261.63);
+}
+
+function playRedSound() {
+    playSound(329.63);
+}
+
+function playYellowSound() {
+    playSound(392.00);
+}
+
+function playBlueSound() {
+    playSound(523.25);
+}
+
+function playCorrectSound() {
+    playSound(523.25, 0.15);
+
+    setTimeout(() => {
+        playSound(659.25, 0.15);
+    }, 150);
+
+    setTimeout(() => {
+        playSound(783.99, 0.3);
+    }, 300);
+}
+
+function playWrongSound() {
+    playSound(196.00, 0.3);
+
+    setTimeout(() => {
+        playSound(130.81, 0.5);
+    }, 300);
+}
+
+
 // Função de contagem regressiva para iniviar o jogo
 async function countdown() {
-  
-  document.body.classList.add("block");
-  // Tempo para contagem regressiva
-  let time = 3;
+    document.body.classList.add("block");
 
-  let container = document.querySelector(".circle-mid");
+    let time = 3;
+    let container = document.querySelector(".circle-mid");
 
-  // Desabilitando o botão de inicializar
-  buttonInitGame.disabled = true;
-  buttonInitGame.classList.remove("usable");
+    buttonInitGame.disabled = true;
+    buttonInitGame.classList.remove("usable");
 
-  // Lógica para contagem regressiva
-  while (time > 0) {
-    container.textContent = time;
+    while (time > 0) {
+        container.textContent = time;
+
+        playSound(261.63, 0.15);
+
+        await sleep(1000);
+
+        time--;
+    }
+
+    container.textContent = "GO!";
+
+    playSound(783.99, 0.4);
 
     await sleep(1000);
 
-    time--;
-  }
+    container.textContent = "";
 
-  container.textContent = "";
-
-  await sleep(1000);
-
-  randomColor();
+    randomColor();
 }
+
 
 // Função para escolher uma cor aleatóriamente
 function randomColor() {
@@ -65,14 +127,30 @@ function randomColor() {
 async function activeColor() {
   for (const item of currentSequence) {
     const buttonColor = document.querySelector(`#${item}`);
+    const colorActive = buttonColor.getAttribute('id')
 
     buttonColor.classList.add("active");
+
+    switch (colorActive) {
+      case 'green':
+        playGreenSound()
+        break;
+      case 'red':
+        playRedSound()
+        break;
+      case 'blue':
+        playBlueSound()
+        break;
+      case 'yellow':
+        playYellowSound()
+        break;
+    }
 
     await sleep(500);
 
     buttonColor.classList.remove("active");
 
-    await sleep(500);
+    await sleep(300);
   }
 
   canPlay = true;
@@ -99,6 +177,8 @@ async function checkSequence() {
 }
 
 async function win() {
+  playCorrectSound();
+
   buttonsTableGame.forEach(async (button) => {
     button.classList.add("win");
     button.classList.remove("usable");
@@ -121,6 +201,8 @@ async function win() {
 
 async function gameOver() {
   document.body.classList.remove("block");
+
+  playWrongSound();
 
   buttonsTableGame.forEach(async (button) => {
     button.classList.add("game-over");
@@ -162,6 +244,22 @@ buttonsTableGame.forEach((button) => {
     button.classList.remove("active");
 
     const colorClicked = button.getAttribute("id");
+
+    switch (colorClicked) {
+      case 'green':
+        playGreenSound()
+        break;
+      case 'red':
+        playRedSound()
+        break;
+      case 'blue':
+        playBlueSound()
+        break;
+      case 'yellow':
+        playYellowSound()
+        break;
+    }
+
     userSequence.push(colorClicked);
 
     checkSequence();
