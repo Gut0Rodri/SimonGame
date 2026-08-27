@@ -59,7 +59,7 @@ Simon_Game/
 
 Acesse o jogo diretamente pelo deploy na Vercel:
 
-**[🎮 Jogar Simon Game](https://seu-projeto.vercel.app)**
+**[🎮 Jogar Simon Game](https://simongamecr.vercel.app/)**
 
 ### 💻 Localmente
 
